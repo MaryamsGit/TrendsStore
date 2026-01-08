@@ -29,7 +29,7 @@
         <activity android:name=".ui.AuthActivity"/>
 
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.ui"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
