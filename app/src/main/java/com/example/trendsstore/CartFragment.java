@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.trendsstore.R;
-import com.example.trendsstore.ui.AuthActivity;
+import com.example.trendsstore.AuthActivity;
 
 public class CartFragment extends Fragment {
     public CartFragment() { super(R.layout.fragment_cart); }

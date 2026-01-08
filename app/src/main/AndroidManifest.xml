@@ -21,15 +21,18 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
 
-        <activity android:name=".ui.ChatActivity"/>
-        <activity android:name=".ui.GeminiChatActivity"/>
-        <activity android:name=".ui.QrScannerActivity"/>
+        <activity android:name="ChatActivity"/>
+        <activity android:name="GeminiChatActivity"/>
+        <activity android:name="QrScannerActivity"/>
 
-        <activity android:name=".ui.MainActivity"/>
-        <activity android:name=".ui.AuthActivity"/>
+        <activity android:name="MainActivity"/>
+        <activity android:name="AuthActivity"/>
+
+
+
 
         <activity
-            android:name=".ui.ui"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
