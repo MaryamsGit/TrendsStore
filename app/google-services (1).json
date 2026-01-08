@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "587569279860",
+    "project_id": "trendsstore-244c3",
+    "storage_bucket": "trendsstore-244c3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587569279860:android:bfa36a53435eed370ff221",
+        "android_client_info": {
+          "package_name": "com.example.trendsstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJljYQCJEySISZutk_K-reTO5cR2qL-4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
