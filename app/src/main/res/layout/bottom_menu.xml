@@ -1,7 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_shop" android:title="Shop" android:icon="@android:drawable/ic_menu_view"/>
-    <item android:id="@+id/nav_category" android:title="Category" android:icon="@android:drawable/ic_menu_sort_by_size"/>
-    <item android:id="@+id/nav_trends" android:title="Trends" android:icon="@android:drawable/ic_menu_gallery"/>
-    <item android:id="@+id/nav_cart" android:title="Cart" android:icon="@android:drawable/ic_menu_add"/>
-    <item android:id="@+id/nav_me" android:title="Me" android:icon="@android:drawable/ic_menu_myplaces"/>
+    <item
+        android:id="@+id/nav_shop"
+        android:title="Shop"
+        android:icon="@android:drawable/ic_menu_view"/>
+    <item
+        android:id="@+id/nav_category"
+        android:title="Category"
+        android:icon="@android:drawable/ic_menu_sort_by_size"/>
+    <item
+        android:id="@+id/nav_trends"
+        android:title="Trends"
+        android:icon="@android:drawable/ic_menu_gallery"/>
+    <item
+        android:id="@+id/nav_cart"
+        android:title="Cart"
+        android:icon="@android:drawable/ic_menu_add"/>
+    <item
+        android:id="@+id/nav_me"
+        android:title="Me"
+        android:icon="@android:drawable/ic_menu_myplaces"/>
 </menu>
