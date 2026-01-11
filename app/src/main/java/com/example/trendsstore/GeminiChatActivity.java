@@ -1,20 +1,19 @@
 package com.example.trendsstore;
 
 import android.os.Bundle;
-import android.widget.*;
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.trendsstore.R;
-import com.example.trendsstore.GeminiClient;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-import java.io.IOException;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.trendsstore.GeminiClient;
 
 public class GeminiChatActivity extends AppCompatActivity {
 
     private TextView tvChat;
     private EditText etMsg;
+    private GeminiClient geminiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +24,9 @@ public class GeminiChatActivity extends AppCompatActivity {
         etMsg = findViewById(R.id.etMsg);
         Button btnSend = findViewById(R.id.btnSend);
 
+        // ✅ Initialize Gemini client with API key
+        geminiClient = new GeminiClient(BuildConfig.GEMINI_API_KEY);
+
         btnSend.setOnClickListener(v -> {
             String msg = etMsg.getText().toString().trim();
             if (msg.isEmpty()) return;
@@ -32,18 +34,19 @@ public class GeminiChatActivity extends AppCompatActivity {
             tvChat.append("\nYou: " + msg + "\n");
             etMsg.setText("");
 
-            GeminiClient.send("You are an app assistant. Answer briefly.\nUser: " + msg, new Callback() {
-                @Override public void onFailure(Call call, IOException e) {
+            String prompt = "You are an app assistant. Answer briefly.\nUser: " + msg;
+
+            // ✅ network call on background thread
+            new Thread(() -> {
+                try {
+                    String reply = geminiClient.askGemini(prompt);
+                    runOnUiThread(() -> tvChat.append("Bot: " + reply + "\n"));
+                } catch (Exception e) {
                     runOnUiThread(() -> tvChat.append("Bot: Error - " + e.getMessage() + "\n"));
                 }
-
-                @Override public void onResponse(Call call, Response response) throws IOException {
-                    String raw = response.body() != null ? response.body().string() : "";
-                    // simplest: show raw JSON (works). You can later parse nicely.
-                    runOnUiThread(() -> tvChat.append("Bot: " + raw + "\n"));
-                }
-            });
+            }).start();
         });
     }
 }
+
 
