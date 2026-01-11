@@ -1,14 +1,19 @@
 package com.example.trendsstore;
 
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.trendsstore.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AuthActivity extends AppCompatActivity {
+
     private EditText etEmail, etPassword;
     private FirebaseAuth auth;
 
@@ -17,7 +22,16 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        auth = FirebaseAuth.getInstance();
+        // ✅ Initialize FirebaseAuth safely INSIDE onCreate
+        try {
+            auth = FirebaseAuth.getInstance();
+        } catch (Exception e) {
+            Toast.makeText(this, "Firebase not initialized. Check google-services.json + Gradle plugin.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            finish(); // Close activity to avoid null auth crashes
+            return;
+        }
+
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
 
@@ -31,6 +45,11 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void login() {
+        if (auth == null) {
+            Toast.makeText(this, "Firebase not ready", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String email = etEmail.getText().toString().trim();
         String pass = etPassword.getText().toString().trim();
 
@@ -49,6 +68,11 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void register() {
+        if (auth == null) {
+            Toast.makeText(this, "Firebase not ready", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String email = etEmail.getText().toString().trim();
         String pass = etPassword.getText().toString().trim();
 
@@ -67,14 +91,23 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void forgotPassword() {
+        if (auth == null) {
+            Toast.makeText(this, "Firebase not ready", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String email = etEmail.getText().toString().trim();
         if (email.isEmpty()) {
             Toast.makeText(this, "Enter email first", Toast.LENGTH_SHORT).show();
             return;
         }
+
         auth.sendPasswordResetEmail(email)
-                .addOnSuccessListener(r -> Toast.makeText(this, "Reset email sent", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnSuccessListener(r ->
+                        Toast.makeText(this, "Reset email sent", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
+
 
